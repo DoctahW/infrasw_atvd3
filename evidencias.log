@@ -25,3 +25,36 @@ gcc  -o scheduler objects/main.o
 exit
 
 Script concluído em 2026-09-07 16:26:53-03:00 [COMMAND_EXIT_CODE="1"]
+Script iniciado em 2026-09-07 18:32:03-03:00 [COMMAND="bash --norc --noprofile -i" TERM="xterm" TTY="/dev/pts/0" COLUMNS="177" LINES="39"]
+[?2004h$ make clean
+[?2004lrm -rf objects scheduler
+[?2004h$ make
+[?2004lmkdir -p objects
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -MMD -MP -c source/erro.c -o objects/erro.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -MMD -MP -c source/main.c -o objects/main.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -MMD -MP -c source/parser.c -o objects/parser.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -MMD -MP -c source/tarefas.c -o objects/tarefas.o
+gcc  -o scheduler objects/erro.o objects/main.o objects/parser.o objects/tarefas.o 
+[?2004h$ ./schedue[Kler rate tesd[Kts/vetores/voo.txt [K
+[?2004l[?2004h$ cat
+[?2004l^[^C
+[?2004h$ ^C[?2004l[?2004h[?2004l
+[?2004h$ ls
+[?2004levidencias.log	Makefile  objects  PLANO.md  scheduler	source	tests
+[?2004h$ ./schet[K[K[K[K[K[K[Ksh tests/f1_check.sh [K
+[?2004lmake: Nada a ser feito para 'all'. 
+ok     voo.txt valido parseia
+ok     total nao numerico  ->  Erro: linha 1: tempo total 'abc': valor nao e um inteiro valido
+ok     total nao positivo  ->  Erro: linha 1: tempo total '0': valor deve ser um inteiro maior que zero
+ok     linha com 3 campos  ->  Erro: linha 2: linha de tarefa fora do formato 'NOME PERIODO DEADLINE BURST'
+ok     campo nao numerico  ->  Erro: linha 2: deadline 'doze': valor nao e um inteiro valido
+ok     campo nao positivo  ->  Erro: linha 2: deadline '0': valor deve ser um inteiro maior que zero
+ok     deadline > periodo  ->  Erro: linha 2: tarefa 'ATT': deadline maior que o periodo
+ok     burst > deadline  ->  Erro: linha 2: tarefa 'ATT': burst maior que o deadline
+ok     arquivo sem tarefas  ->  Erro: o arquivo nao define nenhuma tarefa
+
+resultado: 9 ok, 0 falha
+[?2004h$ [?2004l
+exit
+
+Script concluído em 2026-09-07 18:34:45-03:00 [COMMAND_EXIT_CODE="0"]
