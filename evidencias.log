@@ -1,0 +1,27 @@
+Script iniciado em 2026-09-07 16:11:23-03:00 [COMMAND="bash --norc --noprofile -i" TERM="xterm" TTY="/dev/pts/1" COLUMNS="358" LINES="80"]
+[?2004h$ [K$ [H[2J$ [K$ [K$ make
+[?2004lmkdir -p objects
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -MMD -MP -c source/main.c -o objects/main.o
+gcc  -o scheduler objects/main.o 
+[?2004h$ ./scheduler
+[?2004lUso: ./scheduler <rate|edf> <arquivo>
+[?2004h$ .[K./c[Kscheduler t
+[?2004lUso: ./scheduler <rate|edf> <arquivo>
+[?2004h$ ./scheduler t[Krate
+[?2004lUso: ./scheduler <rate|edf> <arquivo>
+[?2004h$ ./scheduler rate naoexiste.txt
+[?2004lErro: nao foi possivel abrir 'naoexiste.txt': No such file or directory
+[?2004h$ ./schedure ta nao.txt
+[?2004lbash: ./schedure: Arquivo ou diretório inexistente
+[?2004h$ .[K./schedure ta nao.txt[1P[1@l[1P[1@e
+[?2004lbash: ./schedule: Arquivo ou diretório inexistente
+[?2004h$ ./schedule ta nao.txt[C[K[K[K[K[K[K[K[K
+[?2004lbash: ./schedule: Arquivo ou diretório inexistente
+[?2004h$ ./schedule ta[1@r[C[C[C
+[?2004lUso: ./scheduler <rate|edf> <arquivo>
+[?2004h$ ./scheduler tava nao.txt
+[?2004lErro: algoritmo invalido: 'tava' (use 'rate' ou 'edf').
+[?2004h$ [?2004l
+exit
+
+Script concluído em 2026-09-07 16:26:53-03:00 [COMMAND_EXIT_CODE="1"]
