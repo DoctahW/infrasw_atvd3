@@ -396,3 +396,175 @@ KILLED
 exit
 
 Script concluído em 2026-09-09 18:02:35-03:00 [COMMAND_EXIT_CODE="0"]
+Script iniciado em 2026-09-09 18:11:09-03:00 [COMMAND="bash --norc --noprofile -i" TERM="xterm" TTY="/dev/pts/1" COLUMNS="139" LINES="39"]
+[?2004h$ [H[2J$ make
+[?2004lmkdir -p objects
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/erro.c -o objects/erro.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/main.c -o objects/main.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/parser.c -o objects/parser.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/saida.c -o objects/saida.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/sched.c -o objects/sched.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/tarefas.c -o objects/tarefas.o
+gcc  -o scheduler objects/erro.o objects/main.o objects/parser.o objects/saida.o objects/sched.o objects/tarefas.o 
+[?2004h$ ./scheduler rate tests/vetores/voo
+voo_esperado_rate.out  voo.txt                
+$ ./scheduler rate tests/vetores/voo
+voo_esperado_rate.out  voo.txt                
+$ ./scheduler rate tests/vetores/voo
+voo_esperado_rate.out  voo.txt                
+$ ./scheduler rate tests/vetores/voo.txt [K
+[?2004l[?2004h$ cat rate_jems2
+[?2004lcat: rate_jems2: Arquivo ou diretório inexistente
+[?2004h$ car[Kt rate_jems2.out
+[?2004lEXECUTION BY RATE
+[NAV] for 15 units - F
+idle for 5 units
+[ATT] for 8 units - F
+idle for 12 units
+[ATT] for 8 units - F
+idle for 2 units
+[NAV] for 15 units - F
+[ATT] for 7 units - L
+idle for 8 units
+[ATT] for 8 units - F
+idle for 12 units
+
+LOST DEADLINES
+[ATT] 2
+[NAV] 0
+
+COMPLETE EXECUTION
+[ATT] 3
+[NAV] 2
+
+KILLED
+[ATT] 0
+[NAV] 0
+[?2004h$ diff tests/vetores/voo_esperado_rate.out rate_jems2.out [K
+[?2004l1a2,3
+> [NAV] for 15 units - F
+> idle for 5 units
+3,6c5
+< [NAV] for 12 units - H
+< [ATT] for 8 units - F
+< [NAV] for 2 units - L
+< idle for 10 units
+---
+> idle for 12 units
+9,12c8,10
+< [NAV] for 10 units - H
+< [ATT] for 8 units - F
+< [NAV] for 5 units - F
+< idle for 7 units
+---
+> [NAV] for 15 units - F
+> [ATT] for 7 units - L
+> idle for 8 units
+17,18c15,16
+< [ATT] 0
+< [NAV] 1
+---
+> [ATT] 2
+> [NAV] 0
+21,22c19,20
+< [ATT] 5
+< [NAV] 1
+---
+> [ATT] 3
+> [NAV] 2
+[?2004h$ diff tests/vetores/voo_esperado_rate.out rate_jems2.out[C[Ccat rate_jems2.out[K[K[C[C./scheduler rate tests/vetores/voo.txt
+[?2004l[?2004h$ ./scheduler rate tests/vetores/voo.txt[C[C[17@diff tests/vetores/voo_esperado_rate.out rate_jems2.ou[C[C[Ccat rate_jems2.out[K
+[?2004lEXECUTION BY RATE
+[NAV] for 15 units - F
+idle for 5 units
+[ATT] for 8 units - F
+idle for 12 units
+[ATT] for 8 units - F
+idle for 2 units
+[NAV] for 15 units - F
+[ATT] for 7 units - L
+idle for 8 units
+[ATT] for 8 units - F
+idle for 12 units
+
+LOST DEADLINES
+[ATT] 2
+[NAV] 0
+
+COMPLETE EXECUTION
+[ATT] 3
+[NAV] 2
+
+KILLED
+[ATT] 0
+[NAV] 0
+[?2004h$ cat rate_jems2.out[C[C[20@./scheduler rate tests/vetores/voo.tx[C[C[C[20Pcat rate_jems2.ou[C[C[C[20@./scheduler rate tests/vetores/voo.tx[C[C[C[20Pcat rate_jems2.ou[C[C[C[20@./scheduler rate tests/vetores/voo.tx[C[C[C[17@diff tests/vetores/voo_esperado_rate.out rate_jems2.ou[C
+[?2004l1a2,3
+> [NAV] for 15 units - F
+> idle for 5 units
+3,6c5
+< [NAV] for 12 units - H
+< [ATT] for 8 units - F
+< [NAV] for 2 units - L
+< idle for 10 units
+---
+> idle for 12 units
+9,12c8,10
+< [NAV] for 10 units - H
+< [ATT] for 8 units - F
+< [NAV] for 5 units - F
+< idle for 7 units
+---
+> [NAV] for 15 units - F
+> [ATT] for 7 units - L
+> idle for 8 units
+17,18c15,16
+< [ATT] 0
+< [NAV] 1
+---
+> [ATT] 2
+> [NAV] 0
+21,22c19,20
+< [ATT] 5
+< [NAV] 1
+---
+> [ATT] 3
+> [NAV] 2
+[?2004h$ make
+[?2004lgcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/main.c -o objects/main.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/saida.c -o objects/saida.o
+gcc -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"jems2"' -MMD -MP -c source/sched.c -o objects/sched.o
+gcc  -o scheduler objects/erro.o objects/main.o objects/parser.o objects/saida.o objects/sched.o objects/tarefas.o 
+[?2004h$ make[C[Cdiff tests/vetores/voo_esperado_rate.out rate_jems2.out[C[Ccat rate_jems2.out[K[C[C[20@./scheduler rate tests/vetores/voo.tx[C
+[?2004l[?2004h$ ./scheduler rate tests/vetores/voo.txt[C[Cmake[K[C[Cdiff tests/vetores/voo_esperado_rate.out rate_jems2.out[C[Ccat rate_jems2.out[K
+[?2004lEXECUTION BY RATE
+[ATT] for 8 units - F
+[NAV] for 12 units - H
+[ATT] for 8 units - F
+[NAV] for 2 units - L
+idle for 10 units
+[ATT] for 8 units - F
+idle for 2 units
+[NAV] for 10 units - H
+[ATT] for 8 units - F
+[NAV] for 5 units - F
+idle for 7 units
+[ATT] for 8 units - F
+idle for 12 units
+
+LOST DEADLINES
+[ATT] 0
+[NAV] 1
+
+COMPLETE EXECUTION
+[ATT] 5
+[NAV] 1
+
+KILLED
+[ATT] 0
+[NAV] 0
+[?2004h$ cat rate_jems2.out[C[C[20@./scheduler rate tests/vetores/voo.tx[C[C[Cmake[K[C[Cdiff tests/vetores/voo_esperado_rate.out rate_jems2.out
+[?2004l[?2004h$ [?2004l
+exit
+
+Script concluído em 2026-09-09 18:13:38-03:00 [COMMAND_EXIT_CODE="0"]
