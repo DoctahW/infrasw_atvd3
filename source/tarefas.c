@@ -47,6 +47,7 @@ ErroParse adicionar_tarefa(const char *nome, int periodo, int deadline, int burs
     tabela[total].periodo = periodo;
     tabela[total].deadline = deadline;
     tabela[total].burst = burst;
+    tabela[total].indice = total;
     total++;
     return OK;
 }
