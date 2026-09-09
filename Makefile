@@ -4,7 +4,7 @@ LOGIN   = jems2
 SRCDIR  = source
 OBJDIR  = objects
 
-CFLAGS  = -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L
+CFLAGS  = -std=c11 -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -DLOGIN='"$(LOGIN)"'
 LDFLAGS =
 LDLIBS  =
 

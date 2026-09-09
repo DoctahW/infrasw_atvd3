@@ -3,6 +3,8 @@
 #include <errno.h>
 #include "parser.h"
 #include "erro.h"
+#include "sched.h"
+#include "saida.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
@@ -10,7 +12,12 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (strcmp(argv[1], "rate") != 0 && strcmp(argv[1], "edf") != 0) {
+    Politica pol;
+    if (strcmp(argv[1], "rate") == 0) {
+        pol = POL_RATE;
+    } else if (strcmp(argv[1], "edf") == 0) {
+        pol = POL_EDF;
+    } else {
         fprintf(stderr, "Erro: algoritmo invalido: '%s' (use 'rate' ou 'edf').\n", argv[1]);
         return 1;
     }
@@ -29,6 +36,21 @@ int main(int argc, char *argv[]) {
 
     if (e != OK) {
         fprintf(stderr, "Erro: %s\n", erro);
+        return 1;
+    }
+
+    static Trace trace;
+    if (simula(pol, total, &trace) != 0) {
+        fprintf(stderr, "Erro: a simulacao excedeu o limite de segmentos do trace.\n");
+        return 1;
+    }
+
+    char caminho[64];
+    snprintf(caminho, sizeof caminho, "%s_%s.out",
+             pol == POL_RATE ? "rate" : "edf", LOGIN);
+
+    if (escreve_saida(caminho, pol, &trace) != 0) {
+        fprintf(stderr, "Erro: nao foi possivel escrever '%s'.\n", caminho);
         return 1;
     }
 

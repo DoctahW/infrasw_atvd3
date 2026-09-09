@@ -65,13 +65,33 @@ static void finalizar_se_concluida(Instancia *inst, long tick, Trace *trace, Exe
     }
 }
 
-static TarefaRT *selecionar_proxima(int n, Instancia *inst) {
+static long chave_prioridade(Politica pol, const Instancia *inst, int i) {
+    if (pol == POL_RATE) {
+        return tarefa_em(i)->periodo;
+    }
+    return inst[i].deadline_abs;
+}
+
+static int mais_prioritaria(Politica pol, const Instancia *inst, int i, int j) {
+    long ki = chave_prioridade(pol, inst, i);
+    long kj = chave_prioridade(pol, inst, j);
+    if (ki != kj) {
+        return (ki < kj) ? -1 : 1;
+    }
+    return tarefa_em(i)->indice - tarefa_em(j)->indice;
+}
+
+static TarefaRT *selecionar_proxima(Politica pol, int n, Instancia *inst) {
+    int melhor = -1;
     for (int i = 0; i < n; i++) {
-        if (inst[i].ativa && inst[i].restante > 0) {
-            return tarefa_em(i);
+        if (!inst[i].ativa || inst[i].restante <= 0) {
+            continue;
+        }
+        if (melhor < 0 || mais_prioritaria(pol, inst, i, melhor) < 0) {
+            melhor = i;
         }
     }
-    return NULL;
+    return (melhor < 0) ? NULL : tarefa_em(melhor);
 }
 
 static void trocar_se_necessario(TarefaRT *selecionada, long tick, Trace *trace, Execucao *ex) {
@@ -93,8 +113,6 @@ static void contabilizar_perdas_finais(int n, Instancia *inst) {
 }
 
 int simula(Politica pol, long total, Trace *trace) {
-    (void)pol;
-
     int n = tarefas_total();
     static Instancia inst[MAX_TAREFAS];
     memset(inst, 0, sizeof inst);
@@ -107,7 +125,7 @@ int simula(Politica pol, long total, Trace *trace) {
         expirar_deadlines(n, inst, tick, trace, &ex);
         admitir_chegadas(n, inst, tick);
 
-        TarefaRT *selecionada = selecionar_proxima(n, inst);
+        TarefaRT *selecionada = selecionar_proxima(pol, n, inst);
         trocar_se_necessario(selecionada, tick, trace, &ex);
 
         if (selecionada != NULL) {
