@@ -14,11 +14,13 @@ falha=0
 
 limpar() { rm -f rate_jems2.out edf_jems2.out; }
 
-# entrada valida: exit 0, stdout vazio, nenhum .out criado
+# entrada valida: exit 0, stdout vazio, .out da politica criado
+# (na F1 o binario ainda nao simulava e o teste exigia "nenhum .out"; da F3 em
+#  diante a execucao e completa, entao a entrada boa TEM que gerar o arquivo)
 esperar_ok() {
     limpar
     saida=$(./scheduler rate "$1" 2>/dev/null); rc=$?
-    if [ "$rc" -eq 0 ] && [ -z "$saida" ] && [ ! -e rate_jems2.out ]; then
+    if [ "$rc" -eq 0 ] && [ -z "$saida" ] && [ -s rate_jems2.out ]; then
         echo "ok     $2"; ok=$((ok + 1))
     else
         echo "FALHA  $2  (rc=$rc, stdout='$saida')"; falha=$((falha + 1))
