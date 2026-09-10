@@ -14,9 +14,14 @@ DEPS = $(OBJS:.o=.d)
 
 OUTS = rate_$(LOGIN).out edf_$(LOGIN).out
 
-.PHONY: all clean distclean rebuild
+.PHONY: all clean distclean rebuild test
 
 all: $(TARGET)
+
+test: $(TARGET)
+	@sh tests/f1_check.sh
+	@sh tests/f5_check.sh
+	@sh tests/f6_check.sh
 
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
